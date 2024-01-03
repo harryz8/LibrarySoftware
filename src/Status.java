@@ -3,6 +3,9 @@ public abstract class Status {
     public Status(String type) {
         this.type = type;
     }
-    public abstract void setStatus();
-    public abstract String getStatus();
+    @Override
+    public abstract String toString();
+    public String getType() {
+        return type;
+    }
 }
