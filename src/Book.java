@@ -36,6 +36,6 @@ public class Book {
     }
     @Override
     public String toString() {
-        return Integer.toString(ID)+" : "+getTitle()+" "+getAuthor();
+        return Integer.toString(ID)+","+getTitle()+","+getAuthor();
     }
 }
