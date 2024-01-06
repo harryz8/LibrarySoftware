@@ -1,4 +1,5 @@
 public class Main {
+    static final int LOANLENGTH = 7;
     public static void main(String[] args) {
 
     }
@@ -7,5 +8,14 @@ public class Main {
         LibraryRecord newBookStatus = new LibraryRecord(book, bookcaseID, shelfID);
         book.setStatus(newBookStatus);
         return book;
+    }
+    public static Customer newCustomer(String firstName, String surname, int IDNumber) {
+        return new Customer(firstName, surname, IDNumber);
+    }
+    public static Status borrowBook(Book book, Customer customer, Date date) {
+        BorrowRecord newLoan = new BorrowRecord(customer, book, date, LOANLENGTH);
+        book.setStatus(newLoan);
+        customer.addLoanedBook(newLoan);
+        return newLoan;
     }
 }
