@@ -3,10 +3,8 @@ public class BorrowRecord extends Status {
     Book book;
     Date date;
     int loanLength;
-    public BorrowRecord() {
+    public BorrowRecord(Customer customer, Book book, Date date, int loanLength) {
         super("Borrow Record");
-    }
-    public void writeRecord(Customer customer, Book book, Date date, int loanLength) {
         this.customer = customer;
         this.book = book;
         this.date = date;

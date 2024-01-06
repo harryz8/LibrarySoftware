@@ -3,12 +3,11 @@ public class Book {
     String title;
     String author;
     Status status;
-    public Book(int ID, String title, String author, Status status) {
+    public Book(int ID, String title, String author) {
         //Book ID must be unique
         this.ID = ID;
         this.title = title;
         this.author = author;
-        this.status = status;
     }
 
     public void setID(int ID) {
