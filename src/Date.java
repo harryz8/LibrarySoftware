@@ -46,4 +46,25 @@ public class Date {
             }
         }
     }
+    @Override
+    public boolean equals(Object date) {
+        boolean result;
+        if (date == this) {
+            result = true;
+        }
+        else if (date == null) {
+            result = false;
+        }
+        else if (date.getClass() != this.getClass()) {
+            result = false;
+        }
+        Date date2 = (Date) date;
+        if (date2.toString().equals(this.toString())) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    }
 }

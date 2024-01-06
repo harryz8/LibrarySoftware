@@ -18,4 +18,42 @@ public class BorrowRecord extends Status {
     public String toString() {
         return book.toString()+"\n"+customer.toString()+"\n"+date.toString();
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public int getLoanLength() {
+        return loanLength;
+    }
+
+    @Override
+    public boolean equals(Object record) {
+        boolean result;
+        if (record == this) {
+            result = true;
+        }
+        else if (record == null) {
+            result = false;
+        }
+        else if (record.getClass() != this.getClass()) {
+            result = false;
+        }
+        BorrowRecord record2 = (BorrowRecord) record;
+        if (record2.getBook().equals(this.getBook()) && record2.getCustomer().equals(this.getCustomer()) && record2.getDate().equals(this.getDate()) && record2.getLoanLength() == this.getLoanLength()) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    }
 }
