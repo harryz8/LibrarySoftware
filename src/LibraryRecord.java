@@ -11,4 +11,8 @@ public class LibraryRecord extends Status{
     public String toString() {
         return book.toString()+"\n"+Integer.toString(bookcaseID)+","+Integer.toString(shelfID);
     }
+
+    public Book getBook() {
+        return book;
+    }
 }
