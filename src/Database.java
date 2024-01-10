@@ -88,9 +88,9 @@ public class Database {
         System.out.println("This customer does not exist.");
         return null;
     }
-    public BorrowRecord bookLoanTableQuery(int bookID, Date date) {
+    public BorrowRecord bookLoanTableQuery(int bookID, Customer customer) {
         for (BorrowRecord bookRecord : booksOut) {
-            if (bookRecord.getBook().getID() == bookID && bookRecord.getDate().equals(date)) {
+            if (bookRecord.getBook().getID() == bookID && bookRecord.getCustomer().equals(customer)) {
                 return bookRecord;
             }
         }
