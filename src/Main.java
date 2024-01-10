@@ -65,13 +65,13 @@ public class Main {
                     System.out.println("Enter customer ID: ");
                     int cID3 = input.nextInt();
                     input.nextLine();
-                    System.out.println("Enter today's day number: ");
+                    System.out.println("Enter loan date's day number: ");
                     int day2 = input.nextInt();
                     input.nextLine();
-                    System.out.println("Enter today's month number: ");
+                    System.out.println("Enter loan date's month number: ");
                     int month2 = input.nextInt();
                     input.nextLine();
-                    System.out.println("Enter the year: ");
+                    System.out.println("Enter loan date's year: ");
                     int year2 = input.nextInt();
                     input.nextLine();
                     System.out.println("Enter bookcase ID: ");
