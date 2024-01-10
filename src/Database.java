@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.io.*;
 public class Database {
     String databasePath;
     public int LOANLENGTH = 7;
@@ -8,6 +8,11 @@ public class Database {
     ArrayList<LibraryRecord> booksInLibrary = new ArrayList<>();
     public Database(String folderPath) {
         databasePath = folderPath;
+        //https://stackoverflow.com/questions/3634853/how-to-create-a-directory-in-java
+        File databaseDir = new File(databasePath);
+        if (!databaseDir.exists()){
+            databaseDir.mkdirs();
+        }
     }
     public Book newBook(int bookID, String title, String author, int bookcaseID, int shelfID) {
         Book book = new Book(bookID, title, author);
@@ -89,6 +94,32 @@ public class Database {
         return null;
     }
     public void export() {
-
+        String assignedCustomersText = arrayListToString(assignedCustomers);
+        String booksInLibraryText = arrayListToString(booksInLibrary);
+        String booksOutText = arrayListToString(booksOut);
+        try {
+            Open customersFile = new Open(databasePath + Open.getSeparator() + "customers.zld", 'w');
+            customersFile.write(assignedCustomersText);
+            customersFile.close();
+        }
+        catch (IOException e) {
+            System.out.println("An exception occurred when saving the customers file: "+e.getMessage());
+        }
+        try {
+            Open libraryBooksFile = new Open(databasePath + Open.getSeparator() + "recordsOfBooksInLibrary.zld", 'w');
+            libraryBooksFile.write(booksInLibraryText);
+            libraryBooksFile.close();
+        }
+        catch (IOException e) {
+            System.out.println("An exception occurred when saving the recordsOfBooksInLibrary file: "+e.getMessage());
+        }
+        try {
+            Open loanedBooksFile = new Open(databasePath + Open.getSeparator() + "recordsOfLoanedBooks.zld", 'w');
+            loanedBooksFile.write(booksOutText);
+            loanedBooksFile.close();
+        }
+        catch (IOException e) {
+            System.out.println("An exception occurred when saving the recordsOfLoanedBooks file: "+e.getMessage());
+        }
     }
 }
