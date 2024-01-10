@@ -29,6 +29,11 @@ public class Customer {
         }
         return null;
     }
+
+    public ArrayList<BorrowRecord> getLoanedBooks() {
+        return loanedBooks;
+    }
+
     public int getID() {
         return ID;
     }
