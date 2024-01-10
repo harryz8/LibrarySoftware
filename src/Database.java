@@ -172,8 +172,10 @@ public class Database {
                 for (Customer eachCustomer : assignedCustomers) {
                     if (eachCustomer.equals(newCustomer)) {
                         BorrowRecord loanRecord = new BorrowRecord(eachCustomer, book, date, LOANLENGTH);
+                        booksOut.add(loanRecord);
                         eachCustomer.addLoanedBook(loanRecord);
                         book.setStatus(loanRecord);
+                        break;
                     }
                 }
                 line = loanedBooksFile.readLine();
