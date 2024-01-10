@@ -86,12 +86,7 @@ public class Main {
                     }
                     break;
                 case 5:
-                    /*System.out.println("****|CUSTOMERS|****");
-                    System.out.println(Database.arrayListToString(Database.assignedCustomers));
-                    System.out.println("****|BOOKS IN LIBRARY|****");
-                    System.out.println(Database.arrayListToString(Database.booksInLibrary));
-                    System.out.println("****|BOOKS LOANED|****");
-                    System.out.println(Database.arrayListToString(Database.booksOut));*/
+                    libraryDatabase.export();
                     break;
                 default:
                     gate = false;
