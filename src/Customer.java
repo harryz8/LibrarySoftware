@@ -30,7 +30,7 @@ public class Customer {
         return null;
     }
 
-    public ArrayList<BorrowRecord> getLoanedBooks() {
+    public ArrayList<BorrowRecord> getLoanedBooksList() {
         return loanedBooks;
     }
 
