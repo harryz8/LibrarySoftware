@@ -1,5 +1,5 @@
+package com.library;
 import java.util.ArrayList;
-
 public class Customer {
     String firstName;
     String surname;

@@ -1,3 +1,4 @@
+package com.library;
 public class BorrowRecord extends Status {
     Customer customer;
     Book book;
