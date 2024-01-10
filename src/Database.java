@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.io.*;
 public class Database {
     String databasePath;
-    public int LOANLENGTH = 7;
+    public int LOANLENGTH;
     ArrayList<Customer> assignedCustomers = new ArrayList<>();
     ArrayList<BorrowRecord> booksOut = new ArrayList<>();
     ArrayList<LibraryRecord> booksInLibrary = new ArrayList<>();
-    public Database(String folderPath) {
+    public Database(String folderPath, int loanLength) {
+        LOANLENGTH = loanLength;
         databasePath = folderPath;
         //https://stackoverflow.com/questions/3634853/how-to-create-a-directory-in-java
         File databaseDir = new File(databasePath);
