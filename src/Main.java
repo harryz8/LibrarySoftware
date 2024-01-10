@@ -65,13 +65,13 @@ public class Main {
                     System.out.println("Enter customer ID: ");
                     int cID3 = input.nextInt();
                     input.nextLine();
-                    System.out.println("Enter loan date's day number: ");
+                    System.out.println("Enter today's day number: ");
                     int day2 = input.nextInt();
                     input.nextLine();
-                    System.out.println("Enter loan date's month number: ");
+                    System.out.println("Enter today's month number: ");
                     int month2 = input.nextInt();
                     input.nextLine();
-                    System.out.println("Enter loan date's year: ");
+                    System.out.println("Enter the year: ");
                     int year2 = input.nextInt();
                     input.nextLine();
                     System.out.println("Enter bookcase ID: ");
@@ -80,10 +80,19 @@ public class Main {
                     System.out.println("Enter shelf ID: ");
                     int shlfID2 = input.nextInt();
                     input.nextLine();
-                    BorrowRecord bookRecord2 = libraryDatabase.bookLoanTableQuery(bkID2, new Date(day2, month2, year2));
+                    Date todaysDate = new Date(day2, month2, year2);
                     Customer customer2 = libraryDatabase.customerQuery(cID3);
-                    if (bookRecord2 != null && customer2 != null) {
-                        libraryDatabase.returnBook(customer2, bookRecord2, bkcaseID2, shlfID2);
+                    if (customer2 != null) {
+                        BorrowRecord bookRecord2 = libraryDatabase.bookLoanTableQuery(bkID2, customer2);
+                        Date borrowDate = bookRecord2.getDate();
+                        Date loanEndDate = borrowDate.copy();
+                        loanEndDate.addDays(bookRecord2.getLoanLength());
+                        if (bookRecord2 != null) {
+                            libraryDatabase.returnBook(customer2, bookRecord2, bkcaseID2, shlfID2);
+                            if (loanEndDate.compareTo(todaysDate)<0) {
+                                System.out.println("You have incurred a penalty fee of £50 for returning this book late.");
+                            }
+                        }
                     }
                     break;
                 case 5:
