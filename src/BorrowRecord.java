@@ -16,7 +16,7 @@ public class BorrowRecord extends Status {
         return endDate;
     }
     public String toString() {
-        return book.toString()+"\n"+customer.toString()+"\n"+date.toString();
+        return this.getType()+"¦"+this.getBook().toString()+"¦"+this.getCustomer().toString()+"¦"+this.getDate().toString();
     }
 
     public Customer getCustomer() {

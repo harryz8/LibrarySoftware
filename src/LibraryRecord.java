@@ -9,7 +9,7 @@ public class LibraryRecord extends Status{
         this.shelfID = shelfID;
     }
     public String toString() {
-        return book.toString()+"\n"+Integer.toString(bookcaseID)+","+Integer.toString(shelfID);
+        return this.getType()+"¦"+this.getBook().toString()+"¦"+Integer.toString(bookcaseID)+","+Integer.toString(shelfID);
     }
 
     public Book getBook() {
