@@ -1,8 +1,8 @@
 import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
         boolean gate = true;
+        Database libraryDatabase = new Database("ColwichLibraryDatabase");
         Scanner input = new Scanner(System.in);
         while (gate) {
             System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. Output Database to File\n 6. Exit\nChoose an option by typing its number: ");
@@ -23,7 +23,7 @@ public class Main {
                     System.out.println("Enter shelf ID: ");
                     int shlfID = input.nextInt();
                     input.nextLine();
-                    Database.newBook(bkID, title, author, bkcaseID, shlfID);
+                    libraryDatabase.newBook(bkID, title, author, bkcaseID, shlfID);
                     break;
                 case 2:
                     System.out.println("Enter customer first name: ");
@@ -33,7 +33,7 @@ public class Main {
                     System.out.println("Enter customer ID: ");
                     int cID = input.nextInt();
                     input.nextLine();
-                    Database.newCustomer(fname, sname, cID);
+                    libraryDatabase.newCustomer(fname, sname, cID);
                     break;
                 case 3:
                     System.out.println("Enter book ID: ");
@@ -51,10 +51,10 @@ public class Main {
                     System.out.println("Enter the year: ");
                     int year = input.nextInt();
                     input.nextLine();
-                    LibraryRecord bookRecord = Database.bookInLibraryQuery(bkID1);
-                    Customer customer1 = Database.customerQuery(cID2);
+                    LibraryRecord bookRecord = libraryDatabase.bookInLibraryQuery(bkID1);
+                    Customer customer1 = libraryDatabase.customerQuery(cID2);
                     if (bookRecord != null && customer1 != null) {
-                        Database.borrowBook(Database.bookInLibraryQuery(bkID1), customer1, new Date(day, month, year));
+                        libraryDatabase.borrowBook(libraryDatabase.bookInLibraryQuery(bkID1), customer1, new Date(day, month, year));
                     }
                     break;
                 case 4:
@@ -79,19 +79,19 @@ public class Main {
                     System.out.println("Enter shelf ID: ");
                     int shlfID2 = input.nextInt();
                     input.nextLine();
-                    BorrowRecord bookRecord2 = Database.bookLoanTableQuery(bkID2, new Date(day2, month2, year2));
-                    Customer customer2 = Database.customerQuery(cID3);
+                    BorrowRecord bookRecord2 = libraryDatabase.bookLoanTableQuery(bkID2, new Date(day2, month2, year2));
+                    Customer customer2 = libraryDatabase.customerQuery(cID3);
                     if (bookRecord2 != null && customer2 != null) {
-                        Database.returnBook(customer2, bookRecord2, bkcaseID2, shlfID2);
+                        libraryDatabase.returnBook(customer2, bookRecord2, bkcaseID2, shlfID2);
                     }
                     break;
                 case 5:
-                    System.out.println("****|CUSTOMERS|****");
+                    /*System.out.println("****|CUSTOMERS|****");
                     System.out.println(Database.arrayListToString(Database.assignedCustomers));
                     System.out.println("****|BOOKS IN LIBRARY|****");
                     System.out.println(Database.arrayListToString(Database.booksInLibrary));
                     System.out.println("****|BOOKS LOANED|****");
-                    System.out.println(Database.arrayListToString(Database.booksOut));
+                    System.out.println(Database.arrayListToString(Database.booksOut));*/
                     break;
                 default:
                     gate = false;

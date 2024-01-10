@@ -1,23 +1,27 @@
 import java.util.ArrayList;
 
 public class Database {
-    public static int LOANLENGTH = 7;
-    static ArrayList<Customer> assignedCustomers = new ArrayList<>();
-    static ArrayList<BorrowRecord> booksOut = new ArrayList<>();
-    static ArrayList<LibraryRecord> booksInLibrary = new ArrayList<>();
-    public static Book newBook(int bookID, String title, String author, int bookcaseID, int shelfID) {
+    String databasePath;
+    public int LOANLENGTH = 7;
+    ArrayList<Customer> assignedCustomers = new ArrayList<>();
+    ArrayList<BorrowRecord> booksOut = new ArrayList<>();
+    ArrayList<LibraryRecord> booksInLibrary = new ArrayList<>();
+    public Database(String folderPath) {
+        databasePath = folderPath;
+    }
+    public Book newBook(int bookID, String title, String author, int bookcaseID, int shelfID) {
         Book book = new Book(bookID, title, author);
         LibraryRecord newBookStatus = new LibraryRecord(book, bookcaseID, shelfID);
         book.setStatus(newBookStatus);
         booksInLibrary.add(newBookStatus);
         return book;
     }
-    public static Customer newCustomer(String firstName, String surname, int IDNumber) {
+    public Customer newCustomer(String firstName, String surname, int IDNumber) {
         Customer customer = new Customer(firstName, surname, IDNumber);
         assignedCustomers.add(customer);
         return customer;
     }
-    public static BorrowRecord borrowBook(LibraryRecord bookRecord, Customer customer, Date date) {
+    public BorrowRecord borrowBook(LibraryRecord bookRecord, Customer customer, Date date) {
         Book book = bookRecord.getBook();
         BorrowRecord newLoan = new BorrowRecord(customer, book, date, LOANLENGTH);
         book.setStatus(newLoan);
@@ -31,7 +35,7 @@ public class Database {
         booksOut.add(newLoan);
         return newLoan;
     }
-    public static LibraryRecord returnBook(Customer customer, BorrowRecord curBorrowRecord, int bookcaseID, int shelfID) {
+    public LibraryRecord returnBook(Customer customer, BorrowRecord curBorrowRecord, int bookcaseID, int shelfID) {
         LibraryRecord returnToBookshelf = new LibraryRecord(curBorrowRecord.getBook(), bookcaseID, shelfID);
         customer.removeLoanedBook(curBorrowRecord, returnToBookshelf);
         for (int i=0; i<booksOut.size(); i++) {
@@ -57,7 +61,7 @@ public class Database {
         }
         return sb.toString();
     }
-    public static LibraryRecord bookInLibraryQuery(int bookID) {
+    public LibraryRecord bookInLibraryQuery(int bookID) {
         for (LibraryRecord bookRecord : booksInLibrary) {
             if (bookRecord.getBook().getID() == bookID) {
                 return bookRecord;
@@ -66,7 +70,7 @@ public class Database {
         System.out.println("This book is not available / does not exist.");
         return null;
     }
-    public static Customer customerQuery(int customerID) {
+    public Customer customerQuery(int customerID) {
         for (Customer each : assignedCustomers) {
             if (each.getID() == customerID) {
                 return each;
@@ -75,7 +79,7 @@ public class Database {
         System.out.println("This customer does not exist.");
         return null;
     }
-    public static BorrowRecord bookLoanTableQuery(int bookID, Date date) {
+    public BorrowRecord bookLoanTableQuery(int bookID, Date date) {
         for (BorrowRecord bookRecord : booksOut) {
             if (bookRecord.getBook().getID() == bookID && bookRecord.getDate().equals(date)) {
                 return bookRecord;
@@ -83,5 +87,8 @@ public class Database {
         }
         System.out.println("This book is not loaned / does not exist.");
         return null;
+    }
+    public void export() {
+
     }
 }
