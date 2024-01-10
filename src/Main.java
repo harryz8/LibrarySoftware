@@ -2,9 +2,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean gate = true;
-        Database libraryDatabase = new Database("defaultDatabase");
+        Database libraryDatabase = new Database("defaultDatabase", 7);
         Scanner input = new Scanner(System.in);
         while (gate) {
+            System.out.println();
             System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. View customer's current loans\n 6. Exit\nChoose an option by typing its number: ");
             int option = input.nextInt();
             input.nextLine();
@@ -86,6 +87,17 @@ public class Main {
                     }
                     break;
                 case 5:
+                    System.out.println("Enter customer ID: ");
+                    int cID4 = input.nextInt();
+                    input.nextLine();
+                    Customer customer3 = libraryDatabase.customerQuery(cID4);
+                    for (int i=0; i<customer3.getLoanedBooksList().size(); i++) {
+                        Date date = customer3.getLoanedBooksList().get(i).getDate();
+                        Date endDate = date.copy();
+                        endDate.addDays(customer3.getLoanedBooksList().get(i).getLoanLength());
+                        Book book = customer3.getLoanedBooksList().get(i).getBook();
+                        System.out.println(Integer.toString(book.getID())+" - "+book.getTitle()+" - "+book.getAuthor()+" - Loan start: "+date.toString()+" - Loan end: "+endDate.toString());
+                    }
                     break;
                 default:
                     libraryDatabase.export();
