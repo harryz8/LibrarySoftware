@@ -10,7 +10,10 @@ public class Database {
         databasePath = folderPath;
         //https://stackoverflow.com/questions/3634853/how-to-create-a-directory-in-java
         File databaseDir = new File(databasePath);
-        if (!databaseDir.exists()){
+        if (databaseDir.exists()) {
+            importIn(databasePath);
+        }
+        else {
             databaseDir.mkdirs();
         }
     }
@@ -120,6 +123,68 @@ public class Database {
         }
         catch (IOException e) {
             System.out.println("An exception occurred when saving the recordsOfLoanedBooks file: "+e.getMessage());
+        }
+    }
+    public void importIn(String itsDatabaseFolderPath) {
+        String[] customersStringArray;
+        String[] libraryBooksStringArray;
+        String[] loanedBooksStringArray;
+        try {
+            Open customersFile = new Open(itsDatabaseFolderPath + Open.getSeparator() + "customers.zld", 'r');
+            String line = customersFile.readLine();
+            while (line != null) {
+                String[] lineArray = line.split(",");
+                Customer lineCustomer = new Customer(lineArray[1], lineArray[2], Integer.parseInt(lineArray[0]));
+                assignedCustomers.add(lineCustomer);
+                line = customersFile.readLine();
+            }
+            customersFile.close();
+        }
+        catch (IOException e) {
+            System.out.println("An exception occurred when reading the customers file: "+e.getMessage());
+        }
+        try {
+            Open libraryBooksFile = new Open(itsDatabaseFolderPath + Open.getSeparator() + "recordsOfBooksInLibrary.zld", 'r');
+            String line = libraryBooksFile.readLine();
+            while (line != null) {
+                String[] lineArray = line.split("¦");
+                String[] bookArray = lineArray[1].split(",");
+                String[] locationArray = lineArray[2].split(",");
+                Book book = new Book(Integer.parseInt(bookArray[0]), bookArray[1], bookArray[2]);
+                LibraryRecord libraryRecord = new LibraryRecord(book, Integer.parseInt(locationArray[0]), Integer.parseInt(locationArray[1]));
+                booksInLibrary.add(libraryRecord);
+                book.setStatus(libraryRecord);
+                line = libraryBooksFile.readLine();
+            }
+            libraryBooksFile.close();
+        }
+        catch (IOException e) {
+            System.out.println("An exception occurred when reading the recordsOfBooksInLibrary file: "+e.getMessage());
+        }
+        try {
+            Open loanedBooksFile = new Open(itsDatabaseFolderPath + Open.getSeparator() + "recordsOfLoanedBooks.zld", 'r');
+            String line = loanedBooksFile.readLine();
+            while (line != null) {
+                String[] lineArray = line.split("¦");
+                String[] bookArray = lineArray[1].split(",");
+                String[] customerArray = lineArray[2].split(",");
+                String[] dateArray = lineArray[3].split("/");
+                Date date = new Date(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]));
+                Book book = new Book(Integer.parseInt(bookArray[0]), bookArray[1], bookArray[2]);
+                Customer newCustomer = new Customer(customerArray[1], customerArray[2], Integer.parseInt(customerArray[0]));
+                for (Customer eachCustomer : assignedCustomers) {
+                    if (eachCustomer.equals(newCustomer)) {
+                        BorrowRecord loanRecord = new BorrowRecord(eachCustomer, book, date, LOANLENGTH);
+                        eachCustomer.addLoanedBook(loanRecord);
+                        book.setStatus(loanRecord);
+                    }
+                }
+                line = loanedBooksFile.readLine();
+            }
+            loanedBooksFile.close();
+        }
+        catch (IOException e) {
+            System.out.println("An exception occurred when reading the recordsOfLoanedBooks file: "+e.getMessage());
         }
     }
 }
