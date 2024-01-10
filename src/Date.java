@@ -45,6 +45,7 @@ public class Date {
                 daysInCurrentMonth = 30;
             }
         }
+        day = newDay;
     }
     @Override
     public boolean equals(Object date) {
