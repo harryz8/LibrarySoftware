@@ -1,3 +1,6 @@
+### Personal ###
+defaultDatabase/
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/

@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean gate = true;
-        Database libraryDatabase = new Database("ColwichLibraryDatabase");
+        Database libraryDatabase = new Database("defaultDatabase");
         Scanner input = new Scanner(System.in);
         while (gate) {
             System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. Output Database to File\n 6. Exit\nChoose an option by typing its number: ");
@@ -85,11 +85,8 @@ public class Main {
                         libraryDatabase.returnBook(customer2, bookRecord2, bkcaseID2, shlfID2);
                     }
                     break;
-                case 5:
-                    libraryDatabase.export();
-                    System.out.println();
-                    break;
                 default:
+                    libraryDatabase.export();
                     gate = false;
                     break;
             }
