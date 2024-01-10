@@ -29,7 +29,6 @@ public class Customer {
         }
         return null;
     }
-
     public int getID() {
         return ID;
     }
