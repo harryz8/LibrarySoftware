@@ -126,9 +126,6 @@ public class Database {
         }
     }
     public void importIn(String itsDatabaseFolderPath) {
-        String[] customersStringArray;
-        String[] libraryBooksStringArray;
-        String[] loanedBooksStringArray;
         try {
             Open customersFile = new Open(itsDatabaseFolderPath + Open.getSeparator() + "customers.zld", 'r');
             String line = customersFile.readLine();

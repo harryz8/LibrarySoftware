@@ -5,7 +5,7 @@ public class Main {
         Database libraryDatabase = new Database("defaultDatabase");
         Scanner input = new Scanner(System.in);
         while (gate) {
-            System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. Output Database to File\n 6. Exit\nChoose an option by typing its number: ");
+            System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. View customer's current loans\n 6. Exit\nChoose an option by typing its number: ");
             int option = input.nextInt();
             input.nextLine();
             switch (option) {
@@ -84,6 +84,8 @@ public class Main {
                     if (bookRecord2 != null && customer2 != null) {
                         libraryDatabase.returnBook(customer2, bookRecord2, bkcaseID2, shlfID2);
                     }
+                    break;
+                case 5:
                     break;
                 default:
                     libraryDatabase.export();
