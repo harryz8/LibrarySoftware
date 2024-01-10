@@ -1,5 +1,7 @@
 import java.util.Scanner;
-import com.*;
+import com.Database;
+import com.library.*;
+import com.toolkit.*;
 public class Main {
     public static void main(String[] args) {
         boolean gate = true;
