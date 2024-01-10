@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         boolean gate = true;
         while (gate) {
-            System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. Exit\nChoose an option by typing its number: ");
+            System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. Output Database\n 6. Exit\nChoose an option by typing its number: ");
             Scanner input = new Scanner(System.in);
             int option = input.nextInt();
             input.nextLine();
@@ -43,6 +43,14 @@ public class Main {
                 case 3:
                     break;
                 case 4:
+                    break;
+                case 5:
+                    System.out.println("****|CUSTOMERS|****");
+                    System.out.println(arrayListToString(assignedCustomers));
+                    System.out.println("****|BOOKS IN LIBRARY|****");
+                    System.out.println(arrayListToString(booksInLibrary));
+                    System.out.println("****|BOOKS LOANED|****");
+                    System.out.println(arrayListToString(booksOut));
                     break;
                 default:
                     gate = false;
