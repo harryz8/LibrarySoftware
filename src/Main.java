@@ -7,7 +7,7 @@ public class Main {
     static ArrayList<LibraryRecord> booksInLibrary = new ArrayList<>();
     public static void main(String[] args) {
         Book book = newBook(1,"The Hobbit", "JRR Tolkien", 1, 1);
-        
+
     }
     public static Book newBook(int bookID, String title, String author, int bookcaseID, int shelfID) {
         Book book = new Book(bookID, title, author);
@@ -46,5 +46,19 @@ public class Main {
         }
         booksInLibrary.add(returnToBookshelf);
         return returnToBookshelf;
+    }
+    public static String objectArrayListToString(ArrayList<Object> list) {
+        StringBuilder sb = new StringBuilder();
+        for (Object each : list) {
+            sb.append(each.toString()+"\n");
+        }
+        return sb.toString();
+    }
+    public static String objectArrayListToString(ArrayList<Object> list, String sep) {
+        StringBuilder sb = new StringBuilder();
+        for (Object each : list) {
+            sb.append(each.toString()+sep);
+        }
+        return sb.toString();
     }
 }
