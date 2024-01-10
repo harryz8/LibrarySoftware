@@ -2,10 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    static final int LOANLENGTH = 7;
-    static ArrayList<Customer> assignedCustomers = new ArrayList<>();
-    static ArrayList<BorrowRecord> booksOut = new ArrayList<>();
-    static ArrayList<LibraryRecord> booksInLibrary = new ArrayList<>();
     public static void main(String[] args) {
         boolean gate = true;
         while (gate) {
@@ -28,7 +24,7 @@ public class Main {
                     System.out.println("Enter shelf ID: ");
                     int shlfID = input.nextInt();
                     input.nextLine();
-                    newBook(bkID, title, author, bkcaseID, shlfID);
+                    Database.newBook(bkID, title, author, bkcaseID, shlfID);
                     break;
                 case 2:
                     System.out.println("Enter customer first name: ");
@@ -38,19 +34,38 @@ public class Main {
                     System.out.println("Enter customer ID: ");
                     int cID = input.nextInt();
                     input.nextLine();
-                    newCustomer(fname, sname, cID);
+                    Database.newCustomer(fname, sname, cID);
                     break;
                 case 3:
+                    System.out.println("Enter book ID: ");
+                    int bkID1 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter customer ID: ");
+                    int cID2 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter today's day number: ");
+                    int day = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter today's month number: ");
+                    int month = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter the year: ");
+                    int year = input.nextInt();
+                    input.nextLine();
+                    LibraryRecord bookRecord = Database.bookInLibraryQuery(bkID1);
+                    if (bookRecord != null) {
+                        Database.borrowBook(Database.bookInLibraryQuery(bkID1), Database.customerQuery(cID2), new Date(day, month, year));
+                    }
                     break;
                 case 4:
                     break;
                 case 5:
                     System.out.println("****|CUSTOMERS|****");
-                    System.out.println(arrayListToString(assignedCustomers));
+                    System.out.println(Database.arrayListToString(Database.assignedCustomers));
                     System.out.println("****|BOOKS IN LIBRARY|****");
-                    System.out.println(arrayListToString(booksInLibrary));
+                    System.out.println(Database.arrayListToString(Database.booksInLibrary));
                     System.out.println("****|BOOKS LOANED|****");
-                    System.out.println(arrayListToString(booksOut));
+                    System.out.println(Database.arrayListToString(Database.booksOut));
                     break;
                 default:
                     gate = false;
@@ -59,56 +74,5 @@ public class Main {
             input.close();
         }
     }
-    public static Book newBook(int bookID, String title, String author, int bookcaseID, int shelfID) {
-        Book book = new Book(bookID, title, author);
-        LibraryRecord newBookStatus = new LibraryRecord(book, bookcaseID, shelfID);
-        book.setStatus(newBookStatus);
-        booksInLibrary.add(newBookStatus);
-        return book;
-    }
-    public static Customer newCustomer(String firstName, String surname, int IDNumber) {
-        Customer customer = new Customer(firstName, surname, IDNumber);
-        assignedCustomers.add(customer);
-        return customer;
-    }
-    public static BorrowRecord borrowBook(LibraryRecord bookRecord, Customer customer, Date date) {
-        Book book = bookRecord.getBook();
-        BorrowRecord newLoan = new BorrowRecord(customer, book, date, LOANLENGTH);
-        book.setStatus(newLoan);
-        customer.addLoanedBook(newLoan);
-        for (int i=0; i<booksInLibrary.size(); i++) {
-            if (booksInLibrary.get(i).getBook() == bookRecord.getBook()) {
-                booksInLibrary.remove(i);
-                break;
-            }
-        }
-        booksOut.add(newLoan);
-        return newLoan;
-    }
-    public static LibraryRecord returnBook(Customer customer, BorrowRecord curBorrowRecord, int bookcaseID, int shelfID) {
-        LibraryRecord returnToBookshelf = new LibraryRecord(curBorrowRecord.getBook(), bookcaseID, shelfID);
-        customer.removeLoanedBook(curBorrowRecord, returnToBookshelf);
-        for (int i=0; i<booksOut.size(); i++) {
-            if (booksOut.get(i).getBook() == curBorrowRecord.getBook()) {
-                booksOut.remove(i);
-                break;
-            }
-        }
-        booksInLibrary.add(returnToBookshelf);
-        return returnToBookshelf;
-    }
-    public static String arrayListToString(ArrayList<?> list) {
-        StringBuilder sb = new StringBuilder();
-        for (Object each : list) {
-            sb.append(each.toString()+"\n");
-        }
-        return sb.toString();
-    }
-    public static String arrayListToString(ArrayList<?> list, String sep) {
-        StringBuilder sb = new StringBuilder();
-        for (Object each : list) {
-            sb.append(each.toString()+sep);
-        }
-        return sb.toString();
-    }
+
 }
