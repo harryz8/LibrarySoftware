@@ -33,4 +33,25 @@ public class Customer {
     public int getID() {
         return ID;
     }
+    @Override
+    public boolean equals(Object customer) {
+        boolean result;
+        if (customer == this) {
+            result = true;
+        }
+        else if (customer == null) {
+            result = false;
+        }
+        else if (customer.getClass() != this.getClass()) {
+            result = false;
+        }
+        Customer customer2 = (Customer) customer;
+        if (customer2.getID() == this.getID() && customer2.firstName.equals(this.firstName) && customer2.surname.equals(this.surname)) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    }
 }
