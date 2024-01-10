@@ -1,5 +1,5 @@
-package com.library;
-import com.toolkit.*;
+package root.library;
+import root.toolkit.*;
 public class BorrowRecord extends Status {
     Customer customer;
     Book book;

@@ -1,4 +1,4 @@
-package com.library;
+package root.library;
 public class LibraryRecord extends Status{
     int bookcaseID;
     int shelfID;

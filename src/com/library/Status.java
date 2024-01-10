@@ -1,4 +1,4 @@
-package com.library;
+package root.library;
 public abstract class Status {
     String type;
     public Status(String type) {
