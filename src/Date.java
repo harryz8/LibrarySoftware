@@ -122,7 +122,7 @@ public class Date implements Comparable<Date> {
             thisDay += getDaysInMonth(curMonth, thisYear);
             thisMonth--;
         }
-        difference = Math.max(thisDay, otherDay) - Math.min(thisDay, otherDay);
+        difference = thisDay - otherDay;
         return difference;
     }
 }
