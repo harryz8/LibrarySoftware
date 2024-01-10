@@ -53,11 +53,38 @@ public class Main {
                     int year = input.nextInt();
                     input.nextLine();
                     LibraryRecord bookRecord = Database.bookInLibraryQuery(bkID1);
-                    if (bookRecord != null) {
-                        Database.borrowBook(Database.bookInLibraryQuery(bkID1), Database.customerQuery(cID2), new Date(day, month, year));
+                    Customer customer1 = Database.customerQuery(cID2);
+                    if (bookRecord != null && customer1 != null) {
+                        Database.borrowBook(Database.bookInLibraryQuery(bkID1), customer1, new Date(day, month, year));
                     }
                     break;
                 case 4:
+                    System.out.println("Enter book ID: ");
+                    int bkID2 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter customer ID: ");
+                    int cID3 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter today's day number: ");
+                    int day2 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter today's month number: ");
+                    int month2 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter the year: ");
+                    int year2 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter bookcase ID: ");
+                    int bkcaseID2 = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter shelf ID: ");
+                    int shlfID2 = input.nextInt();
+                    input.nextLine();
+                    BorrowRecord bookRecord2 = Database.bookLoanTableQuery(bkID2, new Date(day2, month2, year2));
+                    Customer customer2 = Database.customerQuery(cID3);
+                    if (bookRecord2 != null && customer2 != null) {
+                        Database.returnBook(customer2, bookRecord2, bkcaseID2, shlfID2);
+                    }
                     break;
                 case 5:
                     System.out.println("****|CUSTOMERS|****");
