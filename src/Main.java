@@ -87,6 +87,7 @@ public class Main {
                     break;
                 case 5:
                     libraryDatabase.export();
+                    System.out.println();
                     break;
                 default:
                     gate = false;
