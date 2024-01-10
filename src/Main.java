@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     static final int LOANLENGTH = 7;
@@ -6,8 +7,49 @@ public class Main {
     static ArrayList<BorrowRecord> booksOut = new ArrayList<>();
     static ArrayList<LibraryRecord> booksInLibrary = new ArrayList<>();
     public static void main(String[] args) {
-        Book book = newBook(1,"The Hobbit", "JRR Tolkien", 1, 1);
-        System.out.println(arrayListToString(booksInLibrary));
+        boolean gate = true;
+        while (gate) {
+            System.out.print("Choose an option: \n 1. Add a book to the library\n 2. Add a customer to the library\n 3. Process a book loan\n 4. Process a book return\n 5. Exit\nChoose an option by typing its number: ");
+            Scanner input = new Scanner(System.in);
+            int option = input.nextInt();
+            input.nextLine();
+            switch (option) {
+                case 1:
+                    System.out.println("Enter book ID: ");
+                    int bkID = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter book title: ");
+                    String title = input.nextLine();
+                    System.out.println("Enter book author: ");
+                    String author = input.nextLine();
+                    System.out.println("Enter bookcase ID: ");
+                    int bkcaseID = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Enter shelf ID: ");
+                    int shlfID = input.nextInt();
+                    input.nextLine();
+                    newBook(bkID, title, author, bkcaseID, shlfID);
+                    break;
+                case 2:
+                    System.out.println("Enter customer first name: ");
+                    String fname = input.nextLine();
+                    System.out.println("Enter customer surname: ");
+                    String sname = input.nextLine();
+                    System.out.println("Enter customer ID: ");
+                    int cID = input.nextInt();
+                    input.nextLine();
+                    newCustomer(fname, sname, cID);
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    gate = false;
+                    break;
+            }
+            input.close();
+        }
     }
     public static Book newBook(int bookID, String title, String author, int bookcaseID, int shelfID) {
         Book book = new Book(bookID, title, author);
